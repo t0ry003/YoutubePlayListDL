@@ -93,7 +93,7 @@ def menu():
 
     elif choice == "B" or choice == "b":
         os.system('cls')
-        print("Single song download not available at the moment!")
+        print("Single song download not available at the moment! If you want this feature give the project a star!")
         time.sleep(2)
         menu()
 
