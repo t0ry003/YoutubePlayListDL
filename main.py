@@ -47,24 +47,24 @@ def convert_to_mp3():
 
 
 def move():
-    sourcepath = './'
-    sourcefiles = os.listdir(sourcepath)
-    download_folder = ("Songs")
-    CHECK_FOLDER = os.path.isdir(download_folder)
+    source_path = './'
+    source_files = os.listdir(source_path)
+    download_folder = "Songs"
+    check_folder = os.path.isdir(download_folder)
 
-    if not CHECK_FOLDER:
+    if not check_folder:
         os.mkdir(download_folder)
         print("Your songs will be in: ", download_folder)
 
     else:
         print(download_folder, " folder already exists!")
 
-    destinationpath = './Songs'
+    destination_path = './Songs'
 
-    for file in sourcefiles:
+    for file in source_files:
         if file.endswith('.mp4'):
-            shutil.move(os.path.join(sourcepath, file),
-                        os.path.join(destinationpath, file))
+            shutil.move(os.path.join(source_path, file),
+                        os.path.join(destination_path, file))
 
 
 def remove_3gbp():
