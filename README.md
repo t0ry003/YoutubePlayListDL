@@ -14,7 +14,7 @@
 #### Feature list:
 
 - [x] Playlist download from link
-- [ ] Single song download from link
+- [x] Single song download from link
 
 
 
