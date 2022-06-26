@@ -7,6 +7,29 @@ from pytube import Playlist
 import moviepy.editor as mp  # moviepy needs ffmpeg
 
 
+def calculate_size():
+    dir_name = "./Songs"
+    test = os.listdir(dir_name)
+    size = 0
+
+    for item in test:
+        size += os.path.getsize(os.path.join(dir_name, item))
+
+    return size
+
+
+def disk_space():
+    disk_space = shutil.disk_usage(".")
+    return disk_space
+
+
+def convert_bytes_into_mb(num):
+    for i in ['bytes', 'KB', 'MB', 'GB', 'TB']:
+        if num < 1024.0:
+            return "%3.1f %s" % (num, i)
+        num /= 1024.0
+
+
 def download_playlist():
     print("Insert the playlist link:")
     link = input(">>")
@@ -77,11 +100,13 @@ def remove_3gbp():
 
     menu()
 
-
 def menu():
     os.system('cls')
     print("-YouTube Download Manager-\n")
-
+    check_folder = os.path.isdir("./Songs")
+    if check_folder:
+        print(
+            f"Songs: {convert_bytes_into_mb(calculate_size())}\nDisk Space: {convert_bytes_into_mb(disk_space()[0])}\n")
     choice = input(
         """A: YouTube PlayList Download;\nB: YouTube Song Download;\nQ: Quit;\n\nPlease enter your choice: """)
 
