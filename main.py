@@ -1,20 +1,15 @@
-# Codded by tory#003. Waiting for suggestions. Remember to import every library i have here :)
-
 import os
 import sys
-import time
 import re
 import shutil
 from pytube import YouTube
 from pytube import Playlist
-# in case the ffmpeg gives errors just specify the bin path :P
-# os.environ["IMAGEIO_FFMPEG_EXE"] = "C:/ffmpeg/bin"
-import moviepy.editor as mp
+import moviepy.editor as mp  # moviepy needs ffmpeg
 
 
 def download_playlist():
-    print("Insert the link:")
-    link = input("")
+    print("Insert the playlist link:")
+    link = input(">>")
     playlist = Playlist(link)
 
     for url in playlist:
@@ -24,7 +19,19 @@ def download_playlist():
         print(vid)
 
     for url in playlist:
+        print(f"Downloading {YouTube(url).title};")
         YouTube(url).streams.filter(only_audio=True).first().download()
+    print(f"Downloaded {playlist.title};")
+
+
+def download_song():
+    print("Insert the song link:")
+    link = input(">>")
+
+    song = YouTube(link)
+    print(f"Downloading {song.title};")
+    song.streams.filter(only_audio=True).first().download()
+    print(f"Downloaded {song.title};")
 
 
 def convert_to_mp3():
@@ -50,7 +57,7 @@ def move():
         print("Your songs will be in: ", download_folder)
 
     else:
-        print(download_folder, " already exists!")
+        print(download_folder, " folder already exists!")
 
     destinationpath = './Songs'
 
@@ -73,15 +80,10 @@ def remove_3gbp():
 
 def menu():
     os.system('cls')
-    print("************ YouTube Download Manager **************")
-    print()
+    print("-YouTube Download Manager-\n")
 
-    choice = input("""
-            A: YouTube PlayList Download
-            B: Youtube Song Download
-            Q: Quit
-
-        Please enter your choice: """)
+    choice = input(
+        """A: YouTube PlayList Download;\nB: YouTube Song Download;\nQ: Quit;\n\nPlease enter your choice: """)
 
     if choice == "A" or choice == "a":
         os.system('cls')
@@ -92,9 +94,10 @@ def menu():
 
     elif choice == "B" or choice == "b":
         os.system('cls')
-        print("Single song download not available at the moment! if you want this feature give the project a star!")
-        time.sleep(2)
-        menu()
+        download_song()
+        move()
+        convert_to_mp3()
+        remove_3gbp()
 
     elif choice == "Q" or choice == "q":
         os.system('cls')
