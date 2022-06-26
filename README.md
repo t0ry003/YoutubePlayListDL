@@ -3,7 +3,7 @@
 </h1>
 
 ​<p align="center">
-   ![](demo\downloader-demo.gif)
+   ![](https://raw.githubusercontent.com/t0ry003/YoutubePlayListDL/master/demo/downloader-demo.gif)
 </p>
 
 
