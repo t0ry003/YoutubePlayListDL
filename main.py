@@ -1,22 +1,21 @@
 # Codded by tory#003. Waiting for suggestions. Remember to import every library i have here :)
 
-import time
-from pytube import YouTube
-from pytube import Playlist
 import os
 import sys
+import time
+import re
+import shutil
+from pytube import YouTube
+from pytube import Playlist
 # in case the ffmpeg gives errors just specify the bin path :P
 # os.environ["IMAGEIO_FFMPEG_EXE"] = "C:/ffmpeg/bin"
 import moviepy.editor as mp
-import re
-import shutil
+
 
 def download_playlist():
     print("Insert the link:")
     link = input("")
     playlist = Playlist(link)
-
-    playlist.video_urls
 
     for url in playlist:
         print(url)
@@ -57,7 +56,8 @@ def move():
 
     for file in sourcefiles:
         if file.endswith('.mp4'):
-            shutil.move(os.path.join(sourcepath, file), os.path.join(destinationpath, file))
+            shutil.move(os.path.join(sourcepath, file),
+                        os.path.join(destinationpath, file))
 
 
 def remove_3gbp():
@@ -74,7 +74,6 @@ def remove_3gbp():
 def menu():
     os.system('cls')
     print("************ YouTube Download Manager **************")
-    # time.sleep(1)
     print()
 
     choice = input("""
@@ -99,7 +98,7 @@ def menu():
 
     elif choice == "Q" or choice == "q":
         os.system('cls')
-        sys.exit
+        sys.exit()
 
     else:
         os.system('cls')
@@ -107,4 +106,6 @@ def menu():
         print("Please try again")
         menu()
 
-menu()
+
+if __name__ == "__main__":
+    menu()

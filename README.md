@@ -1,9 +1,35 @@
-# YoutubePlayListDL
-Easy YouTube MP3 Downloader Using Python
+<h1 align="center">
+	YouTube Playlist Downloader
+</h1>
 
-## How to set it up?
-Guide: https://youtu.be/ZTY4R9rv9ZE <br>
-Install all the used libs (i assume anyone can do it from the thousands of tutorials out there)!
-Install **FFMPEG** from [ffmpeg.org](https://ffmpeg.org/download.html). If it's still bugging add the bin path to `system variables`
+​<p align="center">
+   ![](demo\downloader-demo.gif)
+</p>
 
-> Thank's for using my scripts! For single song downloader give a star to the prject so I can see it's used!
+
+​	This is a powerful python script that can download your favorite music from YouTube as MP3's. The main features are not the design or the friendly GUI, but the speed and how this is not consuming all of the resources from your computer.
+
+​	
+
+#### Feature list:
+
+- [x] Playlist download from link
+- [ ] Single song download from link
+
+
+
+### Guide:
+
+1. Clone the repo on your computer;
+
+2. Install requirements 	
+
+   ```shell
+   pip3 install -r requirements.txt
+   ```
+   
+3. Install FFMPEG using this [guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/);
+
+4. Run the script without any arguments;
+
+3. Have fun!
