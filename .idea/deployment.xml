@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" uploadOnCheckin="5df91d29-1feb-4840-b9f4-50e6e2087dca" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="CLOUD">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="pi@raspberrypi:22 password">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="CLOUD" />
+  </component>
+</project>
