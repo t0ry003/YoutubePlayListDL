@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="images/youtubedownloadicon.png" alt="Sample screenshot" width="500">
+    <img src="images/youtubedownloadicon.png" alt="Logo" width="300">
 </div>
 
 <h1 align="center">
