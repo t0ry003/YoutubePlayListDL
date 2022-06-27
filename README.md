@@ -14,7 +14,7 @@
 [![stars - YoutubePlayListDL](https://img.shields.io/github/stars/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
 [![forks - YoutubePlayListDL](https://img.shields.io/github/forks/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
 
-   <img src="images/demo/downloader-demo.gif" alt="Demo" height="500">
+   <img src="images/demo/downloader-demo.gif" alt="Demo">
 
 </div>
 
