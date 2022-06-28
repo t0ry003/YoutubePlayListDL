@@ -30,7 +30,7 @@
    </p>
 </div>
 
-### Key features:
+## Key features:
 
 - Playlist download from link
 - Single song download from link
@@ -40,7 +40,7 @@
 You can [download](https://github.com/t0ry003/YoutubePlayListDL/releases/tag/v1.1) the latest version of YouTube MP3
 Downloader for Windows, macOS and Linux.
 
-### Guide:
+## Guide:
 
 1. Clone the repo on your computer;
 
