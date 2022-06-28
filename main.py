@@ -8,6 +8,20 @@ from pytube import Playlist
 import moviepy.editor as mp  # moviepy needs ffmpeg
 
 
+# check if a link is a YouTube link
+def check_link(link, playlist=False):
+    if playlist:
+        if re.search('www.youtube.com/playlist', link):
+            return True
+        else:
+            return False
+    else:
+        if re.search('www.youtube.com/watch', link):
+            return True
+        else:
+            return False
+
+
 # calculate the size of the songs folder
 def calculate_size():
     dir_name = "./Songs"
@@ -38,24 +52,32 @@ def convert_seconds_to_minutes(seconds):
 # download playlist
 def download_playlist():
     print("Insert the playlist link:")
-    link = input(">>")
-    playlist = Playlist(link)
-
-    for url in playlist:
-        print(f"Downloading {YouTube(url).title} | {convert_seconds_to_minutes(YouTube(url).length)};")
-        YouTube(url).streams.filter(only_audio=True).first().download()
-    print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
+    link = input(">> ")
+    if check_link(link, True):
+        playlist = Playlist(link)
+        for url in playlist:
+            print(f"Downloading {YouTube(url).title} | {convert_seconds_to_minutes(YouTube(url).length)};")
+            YouTube(url).streams.filter(only_audio=True).first().download()
+        print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
+    else:
+        print("Invalid or private playlist link!")
+        sleep(2)
+        menu()
 
 
 # download song
 def download_song():
     print("Insert the song link:")
-    link = input(">>")
-
-    song = YouTube(link)
-    print(f"Downloading {song.title} | {convert_seconds_to_minutes(song.length)};")
-    song.streams.filter(only_audio=True).first().download()
-    print(f"Downloaded {song.title} | {convert_seconds_to_minutes(song.length)};")
+    link = input(">> ")
+    if check_link(link):
+        song = YouTube(link)
+        print(f"Downloading {song.title} | {convert_seconds_to_minutes(song.length)};")
+        song.streams.filter(only_audio=True).first().download()
+        print(f"Downloaded {song.title} | {convert_seconds_to_minutes(song.length)};")
+    else:
+        print("Invalid or private song link!")
+        sleep(2)
+        menu()
 
 
 # convert to mp3
@@ -116,21 +138,21 @@ def menu():
     choice = input(
         """A: YouTube PlayList Download;\nB: YouTube Song Download;\nO: Open 'Songs' Folder;\nQ: Quit;\n\nPlease enter your choice: """)
 
-    if choice == "A" or choice == "a":
+    if choice.upper() == "A":
         os.system('cls')
         download_playlist()
         move()
         convert_to_mp3()
         remove_3gpp()
 
-    elif choice == "B" or choice == "b":
+    elif choice.upper() == "B":
         os.system('cls')
         download_song()
         move()
         convert_to_mp3()
         remove_3gpp()
 
-    elif choice == "O" or choice == "o":
+    elif choice.upper() == "O":
         os.system('cls')
         if check_folder:
             print("Opening songs folder...")
@@ -141,7 +163,7 @@ def menu():
             sleep(3)
         menu()
 
-    elif choice == "Q" or choice == "q":
+    elif choice.upper() == "Q":
         os.system('cls')
         sys.exit()
 
