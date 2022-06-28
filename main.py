@@ -94,7 +94,7 @@ def move():
 
 
 # remove 3gbp
-def remove_3gbp():
+def remove_3gpp():
     dir_name = "./Songs"
     test = os.listdir(dir_name)
 
@@ -121,14 +121,14 @@ def menu():
         download_playlist()
         move()
         convert_to_mp3()
-        remove_3gbp()
+        remove_3gpp()
 
     elif choice == "B" or choice == "b":
         os.system('cls')
         download_song()
         move()
         convert_to_mp3()
-        remove_3gbp()
+        remove_3gpp()
 
     elif choice == "O" or choice == "o":
         os.system('cls')
