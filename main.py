@@ -42,9 +42,9 @@ def download_playlist():
     playlist = Playlist(link)
 
     for url in playlist:
-        print(f"Downloading {YouTube(url).title} - {convert_seconds_to_minutes(YouTube(url).length)};")
+        print(f"Downloading {YouTube(url).title} | {convert_seconds_to_minutes(YouTube(url).length)};")
         YouTube(url).streams.filter(only_audio=True).first().download()
-    print(f"Downloaded {playlist.title} - {convert_seconds_to_minutes(playlist.length)};")
+    print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
 
 
 # download song
@@ -53,9 +53,9 @@ def download_song():
     link = input(">>")
 
     song = YouTube(link)
-    print(f"Downloading {song.title} - {convert_seconds_to_minutes(song.length)};")
+    print(f"Downloading {song.title} | {convert_seconds_to_minutes(song.length)};")
     song.streams.filter(only_audio=True).first().download()
-    print(f"Downloaded {song.title} - {convert_seconds_to_minutes(song.length)};")
+    print(f"Downloaded {song.title} | {convert_seconds_to_minutes(song.length)};")
 
 
 # convert to mp3
