@@ -48,7 +48,7 @@ Downloader for Windows, macOS and Linux.
     git clone https://github.com/t0ry003/YoutubePlayListDL
     ```
 
-2. Install requirements
+2. Install requirements;
 
     ```shell
     pip3 install -r requirements.txt
@@ -57,7 +57,7 @@ Downloader for Windows, macOS and Linux.
 3. Install FFMPEG using this [guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) and do not forget
    to add the path to your PATH variable;
 
-4. Run the script without any arguments;
+4. Run the script without any arguments.
 
    ```shell
    python3 YoutubePlayListDL.py
