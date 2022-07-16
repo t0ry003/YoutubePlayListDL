@@ -1,11 +1,21 @@
 import os
-import sys
 import re
 import shutil
+import sys
 from time import sleep
-from pytube import YouTube
-from pytube import Playlist
+
 import moviepy.editor as mp  # moviepy needs ffmpeg
+from pytube import Playlist
+from pytube import YouTube
+
+
+def verify_command(command):
+    # command must be a simple operation definition
+    # q = verify_command("open the menu")
+    # print(q)
+    columns = shutil.get_terminal_size().columns
+    answear = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
+    return True if answear.lower() == "y" else False
 
 
 # check if a link is a YouTube link
@@ -127,16 +137,29 @@ def remove_3gpp():
     menu()
 
 
+# delete the "Songs" folder
+def delete_songs():
+    dir_name = "./Songs"
+    test = os.listdir(dir_name)
+
+    for item in test:
+        os.remove(os.path.join(dir_name, item))
+
+    os.rmdir(dir_name)
+    menu()
+
+
 # main menu
 def menu():
     os.system('cls')
     print("-YouTube Download Manager-\n")
-    check_folder = os.path.isdir("./Songs")
+    folder_name = "Songs"
+    check_folder = os.path.isdir(f"./{folder_name}")
     if check_folder:
         print(
             f"Songs: {convert_bytes_into_mb(calculate_size())}\nDisk Space: {convert_bytes_into_mb(shutil.disk_usage('.')[0])}\n")
     choice = input(
-        """A: YouTube PlayList Download;\nB: YouTube Song Download;\nO: Open 'Songs' Folder;\nQ: Quit;\n\nPlease enter your choice: """)
+        """A: YouTube PlayList Download;\nB: YouTube Song Download;\nO: Open 'Songs' Folder;\nD: Delete all downloaded songs\nQ: Quit;\n\nPlease enter your choice: """)
 
     if choice.upper() == "A":
         os.system('cls')
@@ -163,13 +186,22 @@ def menu():
             sleep(3)
         menu()
 
+    elif choice.upper() == "D":
+        os.system('cls')
+        if check_folder and verify_command("delete \"Songs\" folder"):
+            delete_songs()
+        else:
+            print("No songs folder found! Please download some songs first!")
+            sleep(3)
+        menu()
+
     elif choice.upper() == "Q":
         os.system('cls')
         sys.exit()
 
     else:
         os.system('cls')
-        print("You must only select either A, B, O or Q;\nPlease try again!")
+        print("You must only select either A, B, O, D or Q;\nPlease try again!")
         sleep(3)
         menu()
 
