@@ -1,2 +1,2 @@
 moviepy==1.0.3
-pytube==12.1.0
+pytube==15.0.0
