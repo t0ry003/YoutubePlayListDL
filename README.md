@@ -13,7 +13,7 @@
 [![t0ry003 - YoutubePlayListDL](https://img.shields.io/static/v1?label=t0ry003&message=YoutubePlayListDL&color=blue&logo=github)](https://github.com/t0ry003/YoutubePlayListDL "Go to GitHub repo")
 [![stars - YoutubePlayListDL](https://img.shields.io/github/stars/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
 [![forks - YoutubePlayListDL](https://img.shields.io/github/forks/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
-[![GitHub release](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)]("Last version")
+[![release - YoutubePlayListDL](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)]("Last version")
 
    <p align="center">
      <a href="#windows-guide">Windows Guide</a>
