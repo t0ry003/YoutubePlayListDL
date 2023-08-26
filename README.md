@@ -13,10 +13,14 @@
 [![t0ry003 - YoutubePlayListDL](https://img.shields.io/static/v1?label=t0ry003&message=YoutubePlayListDL&color=blue&logo=github)](https://github.com/t0ry003/YoutubePlayListDL "Go to GitHub repo")
 [![stars - YoutubePlayListDL](https://img.shields.io/github/stars/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
 [![forks - YoutubePlayListDL](https://img.shields.io/github/forks/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
+[![GitHub release](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)]("Last version")
 
    <p align="center">
+     <a href="#windows-guide">Windows Guide</a>
+   </p>
+   <p align="center">
      <a href="#key-features">Key Features</a> •
-     <a href="#guide">Guide</a> •
+     <a href="#python-guide">Python Guide</a> •
      <a href="#download">Download</a>
    </p>
 
@@ -37,10 +41,25 @@
 
 ## Download
 
-You can [download](https://github.com/t0ry003/YoutubePlayListDL/releases/tag/v1.1) the latest version of YouTube MP3
+You can [download](https://github.com/t0ry003/YoutubePlayListDL/releases) the latest version of YouTube MP3
 Downloader for Windows, macOS and Linux.
 
-## Guide:
+## Windows Guide:
+
+1. Download the latest version of the compiled script
+   from [here](https://github.com/t0ry003/YoutubePlayListDL/releases);
+
+2. Install FFMPEG using this [guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) and do not forget
+   to add the bin path to your PATH variable;
+
+3. Run the executable file as administrator (if not prompted by the OS);
+
+4. If nothing shows up, press enter or any key in the terminal window. This is a known bug from the PYINSTALLER
+   library, that shows up mostly on Windows 10;
+
+5. Use the software as intended and enjoy!
+
+## Python Guide:
 
 1. Clone the repo on your computer;
 
@@ -55,10 +74,21 @@ Downloader for Windows, macOS and Linux.
     ```
 
 3. Install FFMPEG using this [guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) and do not forget
-   to add the path to your PATH variable;
+   to add the bin path to your PATH variable;
 
 4. Run the script without any arguments.
 
    ```shell
    python3 YoutubePlayListDL.py
    ```
+   
+## 🐛 [Buy me a bug to fix](https://www.buymeacoffee.com/rares.cristian)
+   
+   Help me fix bugs faster by buying me a coffee. I will be able to focus more on the project and fix the bugs faster than ever. Thank you for your support!
+   Every donation is highly appreciated! ❤️
+   More projects coming soon!
+
+## 📝 License
+
+   This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+   This app is also add free and will remain like this forever. Only donations are accepted for this freeware. Also, this app is not affiliated with YouTube in any way. It is just a tool to download music from YouTube.
