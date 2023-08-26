@@ -13,7 +13,7 @@
 [![t0ry003 - YoutubePlayListDL](https://img.shields.io/static/v1?label=t0ry003&message=YoutubePlayListDL&color=blue&logo=github)](https://github.com/t0ry003/YoutubePlayListDL "Go to GitHub repo")
 [![stars - YoutubePlayListDL](https://img.shields.io/github/stars/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
 [![forks - YoutubePlayListDL](https://img.shields.io/github/forks/t0ry003/YoutubePlayListDL?style=social)](https://github.com/t0ry003/YoutubePlayListDL)
-[![release - YoutubePlayListDL](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)]("Last version")
+[![release - YoutubePlayListDL](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)](https://github.com/t0ry003/YoutubePlayListDL/releases/latest "Last version")
 
    <p align="center">
      <a href="#windows-guide">Windows Guide</a>
@@ -41,13 +41,13 @@
 
 ## Download
 
-You can [download](https://github.com/t0ry003/YoutubePlayListDL/releases) the latest version of YouTube MP3
+You can [download](https://github.com/t0ry003/YoutubePlayListDL/releases/latest) the latest version of YouTube MP3
 Downloader for Windows, macOS and Linux.
 
 ## Windows Guide:
 
 1. Download the latest version of the compiled script
-   from [here](https://github.com/t0ry003/YoutubePlayListDL/releases);
+   from [here](https://github.com/t0ry003/YoutubePlayListDL/releases/latest);
 
 2. Install FFMPEG using this [guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) and do not forget
    to add the bin path to your PATH variable;
