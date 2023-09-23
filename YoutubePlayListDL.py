@@ -9,13 +9,29 @@ from pytube import Playlist
 from pytube import YouTube
 
 
+class BColors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+# a log function that takes a video link and write it to a file and say that is faulty
+# if the file is not found it will create it
+def log_faulty_video(link):
+    with open("faulty_videos.txt", "a+") as file:
+        file.write(link + "\n")
+
+
+
 def verify_command(command):
-    # command must be a simple operation definition
-    # q = verify_command("open the menu")
-    # print(q)
     columns = shutil.get_terminal_size().columns
-    answear = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
-    return True if answear.lower() == "y" else False
+    answer = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
+    return True if answer.lower() == "y" else False
 
 
 # check if a link is a YouTube link
@@ -61,22 +77,29 @@ def convert_seconds_to_minutes(seconds):
 
 # download playlist
 def download_playlist():
+    print(
+        f"{BColors.OKCYAN}Please make sure the playlist is public! And do not open the songs folder until the download is finished! {BColors.ENDC}")
     print("Insert the playlist link:")
     link = input(">> ")
     if check_link(link, True):
         playlist = Playlist(link)
+        counter = 0
         for video in playlist.video_urls:
             try:
                 yt = YouTube(video)
-                print(f"Downloading {yt.title} | {convert_seconds_to_minutes(yt.length)};")
-                stream = yt.streams.filter(only_audio=True).first()
-                stream.download(output_path="./Songs", filename=yt.title)
-                print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
+                print(
+                    f"{BColors.OKBLUE}DOWNLOADING {yt.title} ({counter+1}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}")
+                yt.streams.filter(only_audio=True).first().download()
+                counter += 1
+                print(
+                    f"{BColors.OKGREEN}DOWNLOADED  {yt.title} ({counter}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}")
             except Exception as e:
-                print(f"Error downloading {video}: {str(e)}")
+                print(f"{BColors.WARNING}Error downloading {video}: {str(e)}")
+                log_faulty_video(video)
+
 
         print(
-            f"Downloaded {len(playlist)} songs from {playlist.title} | Total Duration: {convert_seconds_to_minutes(playlist.length)};")
+            f"{BColors.OKGREEN}Downloaded {counter}/{len(playlist)} songs from {playlist.title} | Total Duration: {convert_seconds_to_minutes(playlist.length)}; {BColors.ENDC}")
     else:
         print("Invalid or private playlist link!")
         sleep(2)
@@ -89,18 +112,18 @@ def download_song():
     link = input(">> ")
     if check_link(link):
         song = YouTube(link)
-        print(f"Downloading {song.title} | {convert_seconds_to_minutes(song.length)};")
+        print(f"{BColors.OKBLUE}Downloading {song.title} | {convert_seconds_to_minutes(song.length)}; {BColors.ENDC}")
         song.streams.filter(only_audio=True).first().download()
-        print(f"Downloaded {song.title} | {convert_seconds_to_minutes(song.length)};")
+        print(f"{BColors.OKGREEN}Downloaded {song.title} | {convert_seconds_to_minutes(song.length)}; {BColors.ENDC}")
     else:
-        print("Invalid or private song link!")
+        print(f"{BColors.WARNING}Invalid or private song link! {BColors.ENDC}")
         sleep(2)
         menu()
 
 
 # convert to mp3
 def convert_to_mp3():
-    folder = "./songs"
+    folder = "./Songs"
 
     for file in os.listdir(folder):
         if re.search('mp4', file):
@@ -160,7 +183,7 @@ def delete_songs():
 # main menu
 def menu():
     os.system('cls')
-    print("-YouTube Download Manager-\n")
+    print(f"{BColors.HEADER}-YouTube Download Manager-\n{BColors.ENDC}")
     folder_name = "Songs"
     check_folder = os.path.isdir(f"./{folder_name}")
     if check_folder:
