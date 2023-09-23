@@ -20,8 +20,7 @@ class BColors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-# a log function that takes a video link and write it to a file and say that is faulty
-# if the file is not found it will create it
+
 def log_faulty_video(link):
     with open("faulty_videos.txt", "a+") as file:
         file.write(link + "\n")
