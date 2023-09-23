@@ -65,10 +65,18 @@ def download_playlist():
     link = input(">> ")
     if check_link(link, True):
         playlist = Playlist(link)
-        for url in playlist:
-            print(f"Downloading {YouTube(url).title} | {convert_seconds_to_minutes(YouTube(url).length)};")
-            YouTube(url).streams.filter(only_audio=True).first().download()
-        print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
+        for video in playlist.video_urls:
+            try:
+                yt = YouTube(video)
+                print(f"Downloading {yt.title} | {convert_seconds_to_minutes(yt.length)};")
+                stream = yt.streams.filter(only_audio=True).first()
+                stream.download(output_path="./Songs", filename=yt.title)
+                print(f"Downloaded {playlist.title} | {convert_seconds_to_minutes(playlist.length)};")
+            except Exception as e:
+                print(f"Error downloading {video}: {str(e)}")
+
+        print(
+            f"Downloaded {len(playlist)} songs from {playlist.title} | Total Duration: {convert_seconds_to_minutes(playlist.length)};")
     else:
         print("Invalid or private playlist link!")
         sleep(2)
