@@ -24,7 +24,7 @@
      <a href="#download">Download</a>
    </p>
 
-   <img src="images/demo/downloader-demo.gif" alt="Demo">
+   <img src="images/demo/downloader-demo-v2.gif" alt="Demo">
 </div>
 
 <div align="center">
