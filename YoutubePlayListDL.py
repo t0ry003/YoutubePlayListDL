@@ -4,7 +4,7 @@ import shutil
 import sys
 from time import sleep
 
-import moviepy.editor as mp  # moviepy needs ffmpeg
+import moviepy.editor as mp
 from pytube import Playlist
 from pytube import YouTube
 
@@ -24,7 +24,6 @@ class BColors:
 def log_faulty_video(link):
     with open("faulty_videos.txt", "a+") as file:
         file.write(link + "\n")
-
 
 
 def verify_command(command):
@@ -87,15 +86,14 @@ def download_playlist():
             try:
                 yt = YouTube(video)
                 print(
-                    f"{BColors.OKBLUE}DOWNLOADING {yt.title} ({counter+1}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}")
+                    f"{BColors.OKBLUE}DOWNLOADING {yt.title} ({counter + 1}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}")
                 yt.streams.filter(only_audio=True).first().download()
                 counter += 1
                 print(
-                    f"{BColors.OKGREEN}DOWNLOADED  {yt.title} ({counter}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}")
+                    f"{BColors.OKGREEN}DOWNLOADED  {yt.title} ({counter}/{len(playlist)}) | {convert_seconds_to_minutes(yt.length)}; {BColors.ENDC}\n")
             except Exception as e:
                 print(f"{BColors.WARNING}Error downloading {video}: {str(e)}")
                 log_faulty_video(video)
-
 
         print(
             f"{BColors.OKGREEN}Downloaded {counter}/{len(playlist)} songs from {playlist.title} | Total Duration: {convert_seconds_to_minutes(playlist.length)}; {BColors.ENDC}")
@@ -189,7 +187,7 @@ def menu():
         print(
             f"Songs: {convert_bytes_into_mb(calculate_size())}\nDisk Space: {convert_bytes_into_mb(shutil.disk_usage('.')[0])}\n")
     choice = input(
-        """A: YouTube PlayList Download;\nB: YouTube Song Download;\nO: Open 'Songs' Folder;\nD: Delete all downloaded songs\nQ: Quit;\n\nPlease enter your choice: """)
+        f"""A: YouTube PlayList Download;\nB: YouTube Song Download;\n{BColors.OKCYAN}C: Convert the remaining MP4{BColors.ENDC}\nO: Open 'Songs' Folder;\nD: Delete all downloaded songs\nQ: Quit;\n\nPlease enter your choice: """)
 
     if choice.upper() == "A":
         os.system('cls')
@@ -205,6 +203,11 @@ def menu():
         convert_to_mp3()
         remove_3gpp()
 
+    elif choice.upper() == "C":
+        os.system('cls')
+        convert_to_mp3()
+        remove_3gpp()
+
     elif choice.upper() == "O":
         os.system('cls')
         if check_folder:
@@ -212,7 +215,7 @@ def menu():
             os.startfile("Songs")
             sleep(2)
         else:
-            print("No songs folder found! Please download some songs first!")
+            print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
             sleep(3)
         menu()
 
@@ -221,7 +224,7 @@ def menu():
         if check_folder and verify_command("delete \"Songs\" folder"):
             delete_songs()
         else:
-            print("No songs folder found! Please download some songs first!")
+            print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
             sleep(3)
         menu()
 
