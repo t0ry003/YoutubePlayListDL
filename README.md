@@ -16,7 +16,8 @@
 [![GitHub release](https://img.shields.io/github/release/t0ry003/YoutubePlayListDL?include_prereleases=&sort=semver)](https://github.com/t0ry003/YoutubePlayListDL/releases/latest "Last version")
 
    <p align="center">
-     <a href="#windows-guide">Windows Guide</a>
+     <a href="#windows-guide">Windows Guide</a> •
+     <a href="/DOCUMENTATION.md">Documentation</a>
    </p>
    <p align="center">
      <a href="#key-features">Key Features</a> •
@@ -81,14 +82,20 @@ Downloader for Windows, macOS and Linux.
    ```shell
    python3 YoutubePlayListDL.py
    ```
-   
-## 🐛 [Buy me a bug to fix](https://www.buymeacoffee.com/rares.cristian)
-   
-   Help me fix bugs faster by buying me a coffee. I will be able to focus more on the project and fix the bugs faster than ever. Thank you for your support!
-   Every donation is highly appreciated! ❤️
-   More projects coming soon!
+
+## 📄 [Documentation](/DOCUMENTATION.md)
+
+If you want to know more about the script, you can read the documentation [here](/DOCUMENTATION.md).
+
+## ☕ [Buy me a coffe](https://www.buymeacoffee.com/rares.cristian)
+
+Help me fix bugs faster by buying me a coffee. I will be able to focus more on the project and fix the bugs faster than
+ever. Thank you for your support!
+Every donation is highly appreciated! ❤️
+More projects coming soon!
 
 ## 📝 License
 
-   This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-   This app is also add free and will remain like this forever. Only donations are accepted for this freeware. Also, this app is not affiliated with YouTube in any way. It is just a tool to download music from YouTube.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This app is also add free and will remain like this forever. Only donations are accepted for this freeware. Also, this
+app is not affiliated with YouTube in any way. It is just a tool to download music from YouTube.
