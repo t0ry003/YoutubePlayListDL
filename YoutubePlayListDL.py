@@ -10,6 +10,9 @@ from pytube import YouTube
 
 
 class BColors:
+    """
+    Define colors for console output.
+    """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
@@ -22,18 +25,42 @@ class BColors:
 
 
 def log_faulty_video(link):
+    """
+    Log a faulty video link to a file.
+
+    Args:
+        link (str): The URL of the faulty video.
+    """
     with open("faulty_videos.txt", "a+") as file:
         file.write(link + "\n")
 
 
 def verify_command(command):
+    """
+    Prompt the user to verify a command.
+
+    Args:
+        command (str): The command to verify.
+
+    Returns:
+        bool: True if the user confirms, False if not.
+    """
     columns = shutil.get_terminal_size().columns
     answer = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
     return True if answer.lower() == "y" else False
 
 
-# check if a link is a YouTube link
 def check_link(link, playlist=False):
+    """
+    Check if a given link is a valid YouTube link.
+
+    Args:
+        link (str): The URL to check.
+        playlist (bool): Set to True if checking for a playlist link.
+
+    Returns:
+        bool: True if it's a valid YouTube link, False otherwise.
+    """
     if playlist:
         if re.search('www.youtube.com/playlist', link):
             return True
@@ -46,8 +73,13 @@ def check_link(link, playlist=False):
             return False
 
 
-# calculate the size of the songs folder
 def calculate_size():
+    """
+    Calculate the size of the 'Songs' folder.
+
+    Returns:
+        int: The size in bytes.
+    """
     dir_name = "./Songs"
     test = os.listdir(dir_name)
     size = 0
@@ -58,16 +90,32 @@ def calculate_size():
     return size
 
 
-# convert bytes to MB
 def convert_bytes_into_mb(num):
+    """
+    Convert bytes to a human-readable string with units (e.g., KB, MB, GB).
+
+    Args:
+        num (int): The number of bytes.
+
+    Returns:
+        str: A human-readable string.
+    """
     for i in ['bytes', 'KB', 'MB', 'GB', 'TB']:
         if num < 1024.0:
             return "%3.1f %s" % (num, i)
         num /= 1024.0
 
 
-# convert seconds to minutes and seconds
 def convert_seconds_to_minutes(seconds):
+    """
+    Convert seconds to a time string in the format "minutes:seconds".
+
+    Args:
+        seconds (int): The number of seconds.
+
+    Returns:
+        str: A time string in the format "minutes:seconds".
+    """
     minutes = seconds // 60
     seconds = seconds % 60
     return f"{minutes}:{seconds}"
