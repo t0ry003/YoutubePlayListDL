@@ -2,10 +2,15 @@ import os
 import re
 import shutil
 import sys
+import requests
 from time import sleep
 
 import moviepy.editor as mp
 from yt_dlp import YoutubeDL
+import webbrowser
+
+# Update the version number before pushing to the repository
+version = "2.1"
 
 
 class BColors:
@@ -19,14 +24,26 @@ class BColors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
+def get_version():
+    # https://github.com/t0ry003/YoutubePlayListDL
+    try:
+        response = requests.get("https://raw.githubusercontent.com/t0ry003/YoutubePlayListDL/refs/heads/main/version")
+        return response.text.strip()
+    except Exception as e:
+        return f"Error getting version: {str(e)}"
+
+
 def log_faulty_video(link):
     with open("faulty_videos.txt", "a+") as file:
         file.write(link + "\n")
+
 
 def verify_command(command):
     columns = shutil.get_terminal_size().columns
     answer = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
     return True if answer.lower() == "y" else False
+
 
 def check_link(link, playlist=False):
     if playlist:
@@ -41,19 +58,17 @@ def calculate_size():
     size = sum(os.path.getsize(os.path.join(dir_name, item)) for item in test)
     return size
 
+
 def convert_bytes_into_mb(num):
     for i in ['bytes', 'KB', 'MB', 'GB', 'TB']:
         if num < 1024.0:
             return "%3.1f %s" % (num, i)
         num /= 1024.0
 
-def convert_seconds_to_minutes(seconds):
-    minutes = seconds // 60
-    seconds = seconds % 60
-    return f"{minutes}:{seconds}"
 
 def download_playlist():
-    print(f"{BColors.OKCYAN}Please make sure the playlist is public! And do not open the songs folder until the download is finished! {BColors.ENDC}")
+    print(
+        f"{BColors.OKCYAN}Please make sure the playlist is public! And do not open the songs folder until the download is finished! {BColors.ENDC}")
     print("Insert the playlist link:")
     link = input(">> ")
     if check_link(link, True):
@@ -77,8 +92,9 @@ def download_playlist():
             print(f"{BColors.WARNING}Error downloading playlist: {str(e)}{BColors.ENDC}")
     else:
         print("Invalid or private playlist link!")
-        sleep(2)
-        menu()
+    sleep(2)
+    menu()
+
 
 def download_song():
     print("Insert the song link:")
@@ -104,8 +120,9 @@ def download_song():
             print(f"{BColors.WARNING}Error downloading song: {str(e)}{BColors.ENDC}")
     else:
         print(f"{BColors.WARNING}Invalid or private song link!{BColors.ENDC}")
-        sleep(2)
-        menu()
+    sleep(2)
+    menu()
+
 
 def convert_to_mp3():
     folder = "./Songs"
@@ -116,6 +133,7 @@ def convert_to_mp3():
             new_file = mp.AudioFileClip(webm_path)
             new_file.write_audiofile(mp3_path)
             os.remove(webm_path)
+
 
 def move():
     source_path = './'
@@ -134,6 +152,7 @@ def move():
         if file.endswith('.webm'):
             shutil.move(os.path.join(source_path, file), os.path.join(destination_path, file))
 
+
 def remove_3gpp():
     dir_name = "./Songs"
     test = os.listdir(dir_name)
@@ -142,6 +161,7 @@ def remove_3gpp():
         if item.endswith(".3gpp"):
             os.remove(os.path.join(dir_name, item))
     menu()
+
 
 def delete_songs():
     dir_name = "./Songs"
@@ -152,56 +172,71 @@ def delete_songs():
     os.rmdir(dir_name)
     menu()
 
+
 def menu():
     os.system('cls')
     print(f"{BColors.HEADER}-YouTube Download Manager-\n{BColors.ENDC}")
     folder_name = "Songs"
     check_folder = os.path.isdir(f"./{folder_name}")
-    if check_folder:
-        print(f"Songs: {convert_bytes_into_mb(calculate_size())}\nDisk Space: {convert_bytes_into_mb(shutil.disk_usage('.')[0])}\n")
-    choice = input(f"""A: YouTube PlayList Download;\nB: YouTube Song Download;\n{BColors.OKCYAN}C: Convert the remaining MP4{BColors.ENDC}\nO: Open 'Songs' Folder;\nD: Delete all downloaded songs\nQ: Quit;\n\nPlease enter your choice: """)
+    if version >= get_version():
+        print(f"{BColors.OKGREEN}Version: {version}{BColors.ENDC}")
 
-    if choice.upper() == "A":
-        os.system('cls')
-        download_playlist()
-
-    elif choice.upper() == "B":
-        os.system('cls')
-        download_song()
-
-    elif choice.upper() == "C":
-        os.system('cls')
-        convert_to_mp3()
-
-    elif choice.upper() == "O":
-        os.system('cls')
         if check_folder:
-            print("Opening songs folder...")
-            os.startfile("Songs")
-            sleep(2)
+            print(
+                f"Songs: {convert_bytes_into_mb(calculate_size())}\nDisk Space: {convert_bytes_into_mb(shutil.disk_usage('.')[0])}\n")
+        choice = input(
+            f"""{BColors.OKCYAN}A: YouTube PlayList Download;\nB: YouTube Song Download;\nO: Open 'Songs' Folder;\nD: Delete all downloaded songs\nQ: Quit;{BColors.ENDC}\n\nPlease enter your choice: """)
+
+        if choice.upper() == "A":
+            os.system('cls')
+            download_playlist()
+
+        elif choice.upper() == "B":
+            os.system('cls')
+            download_song()
+
+        elif choice.upper() == "O":
+            os.system('cls')
+            if check_folder:
+                print("Opening songs folder...")
+                os.startfile("Songs")
+                sleep(2)
+            else:
+                print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
+                sleep(3)
+            menu()
+
+        elif choice.upper() == "D":
+            os.system('cls')
+            if check_folder and verify_command("delete \"Songs\" folder"):
+                delete_songs()
+            else:
+                print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
+                sleep(3)
+            menu()
+
+        elif choice.upper() == "Q":
+            os.system('cls')
+            sys.exit()
+
         else:
-            print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
+            os.system('cls')
+            print("You must only select either A, B, O, D or Q;\nPlease try again!")
             sleep(3)
-        menu()
-
-    elif choice.upper() == "D":
-        os.system('cls')
-        if check_folder and verify_command("delete \"Songs\" folder"):
-            delete_songs()
-        else:
-            print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
-            sleep(3)
-        menu()
-
-    elif choice.upper() == "Q":
-        os.system('cls')
-        sys.exit()
-
+            menu()
     else:
-        os.system('cls')
-        print("You must only select either A, B, O, D or Q;\nPlease try again!")
+        print(f"{BColors.WARNING}New version available! {version} >> {get_version()}{BColors.ENDC}")
+        sleep(2)
+        url = "https://github.com/t0ry003/YoutubePlayListDL/releases/latest"
+
+        try:
+            webbrowser.open(url)
+            print(f"Opened the latest release page: {url}")
+        except Exception as e:
+            print(f"An error occurred while trying to open the URL: {e}")
+
         sleep(3)
-        menu()
+
 
 if __name__ == "__main__":
     menu()
