@@ -28,7 +28,8 @@ class BColors:
 def get_version():
     # https://github.com/t0ry003/YoutubePlayListDL
     try:
-        response = requests.get("https://raw.githubusercontent.com/t0ry003/YoutubePlayListDL/refs/heads/main/version")
+        response = requests.get(
+            "https://raw.githubusercontent.com/t0ry003/YoutubePlayListDL/refs/heads/main/version")
         return response.text.strip()
     except Exception as e:
         return f"Error getting version: {str(e)}"
@@ -41,7 +42,8 @@ def log_faulty_video(link):
 
 def verify_command(command):
     columns = shutil.get_terminal_size().columns
-    answer = input(f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
+    answer = input(
+        f"Are you sure you want to {command}?\n[y/n] = ".center(columns))
     return True if answer.lower() == "y" else False
 
 
@@ -89,7 +91,8 @@ def download_playlist():
                 ydl.download([link])
             print(f"{BColors.OKGREEN}Playlist downloaded successfully!{BColors.ENDC}")
         except Exception as e:
-            print(f"{BColors.WARNING}Error downloading playlist: {str(e)}{BColors.ENDC}")
+            print(
+                f"{BColors.WARNING}Error downloading playlist: {str(e)}{BColors.ENDC}")
     else:
         print("Invalid or private playlist link!")
     sleep(2)
@@ -150,7 +153,8 @@ def move():
     destination_path = './Songs'
     for file in source_files:
         if file.endswith('.webm'):
-            shutil.move(os.path.join(source_path, file), os.path.join(destination_path, file))
+            shutil.move(os.path.join(source_path, file),
+                        os.path.join(destination_path, file))
 
 
 def remove_3gpp():
@@ -202,7 +206,8 @@ def menu():
                 os.startfile("Songs")
                 sleep(2)
             else:
-                print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
+                print(
+                    f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
                 sleep(3)
             menu()
 
@@ -211,7 +216,8 @@ def menu():
             if check_folder and verify_command("delete \"Songs\" folder"):
                 delete_songs()
             else:
-                print(f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
+                print(
+                    f"{BColors.WARNING}No songs folder found! Please download some songs first!{BColors.ENDC}")
                 sleep(3)
             menu()
 
@@ -225,7 +231,8 @@ def menu():
             sleep(3)
             menu()
     else:
-        print(f"{BColors.WARNING}New version available! {version} >> {get_version()}{BColors.ENDC}")
+        print(
+            f"{BColors.WARNING}New version available! {version} >> {get_version()}{BColors.ENDC}")
         sleep(2)
         url = "https://github.com/t0ry003/YoutubePlayListDL/releases/latest"
 
