@@ -87,7 +87,7 @@ Downloader for Windows, macOS and Linux.
 
 If you want to know more about the script, you can read the documentation [here](/DOCUMENTATION.md).
 
-## ☕ [Buy me a coffe](https://www.buymeacoffee.com/rares.cristian)
+## ☕ [Buy me a coffee](https://www.buymeacoffee.com/rares.cristian)
 
 Help me fix bugs faster by buying me a coffee. I will be able to focus more on the project and fix the bugs faster than
 ever. Thank you for your support!
